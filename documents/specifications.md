@@ -34,8 +34,8 @@ The first labyrinth generation algorithm is going to have horrible time complexi
 
 scenario time complexities;
 
-
+![image](https://user-images.githubusercontent.com/32302869/47970084-58d07d00-e089-11e8-89d6-ff54cc7ae6e3.png)
 
 ## Sources
 
-Picture: 
+Picture: http://bigocheatsheet.com/
