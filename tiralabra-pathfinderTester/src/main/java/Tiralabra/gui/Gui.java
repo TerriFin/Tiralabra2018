@@ -31,7 +31,9 @@ public class Gui {
         root.setTop(LabyrinthDrawer.drawLabyrinth(LabyrinthGenerator.generateLabyrinth(labyrinthSize), screenWidth.intValue(), screenHeight.intValue()));
         root.setBottom(UserIO.getUserIO());
         
+        
+        // THIS IS A TEST TO SEE HOW IT DRAWS, FEEL FREE TO DELETE
         BreadthFirstSearch test = new BreadthFirstSearch(LabyrinthGenerator.generateLabyrinth(labyrinthSize));
-        root.setTop(LabyrinthDrawer.drawLabyrinth(test.getLabyrinth(), screenWidth.intValue(), screenHeight.intValue()));
+        root.setTop(LabyrinthDrawer.drawLabyrinth(test.checkIfThereIsPath(), screenWidth.intValue(), screenHeight.intValue()));
     }
 }

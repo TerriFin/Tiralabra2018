@@ -4,24 +4,74 @@ import java.util.ArrayDeque;
 import java.util.HashSet;
 
 public class BreadthFirstSearch {
+
     private Node current;
     private ArrayDeque<Node> queue;
-    private HashSet<Node> closed;
     private Node goal;
-    private int[][] labyrinth;
-    
-    public BreadthFirstSearch(int[][] labyrinth) {
-        this.current = new Node(1, 1, 3);
+    private Node[][] labyrinth;
+
+    public BreadthFirstSearch(Node[][] labyrinth) {
+        this.current = new Node(1, 1, 3, null);
         this.queue = new ArrayDeque<>();
-        this.closed = new HashSet<>();
-        this.goal = new Node(labyrinth.length - 1, labyrinth[0].length - 1, 4);
+        this.goal = new Node(labyrinth.length - 2, labyrinth[0].length - 2, 5, null);
         this.labyrinth = labyrinth;
+
+        this.queue.add(current);
+    }
+
+    public Node[][] checkIfThereIsPath() {
+        while (!queue.isEmpty()) {
+            labyrinth[current.x][current.y].value = 2;
+
+            current = queue.poll();
+
+            if (current.equals(goal)) {
+                labyrinth[current.x][current.y].value = 5;
+                markPathToCurrentNode();
+                return labyrinth;
+            }
+            
+            labyrinth[current.x][current.y].value = 4;
+
+            checkAdjacentNodes();
+        }
+
+        System.out.println("LOPPPUU");
+        return labyrinth;
+    }
+
+    private void markPathToCurrentNode() {
+        Node currentHere = current.parent;
         
-        this.labyrinth[1][1] = 3;
-        this.labyrinth[labyrinth.length - 2][labyrinth[0].length - 2] = 4;
+        while(currentHere.parent != null) {
+            labyrinth[currentHere.x][currentHere.y].value = 6;
+            currentHere = currentHere.parent;
+        }
     }
     
-    public int[][] getLabyrinth() {
-        return labyrinth;
+    private void checkAdjacentNodes() {
+        if (labyrinth[current.x - 1][current.y].value == 0 || labyrinth[current.x - 1][current.y].value == 5) {
+            labyrinth[current.x - 1][current.y].parent = current;
+            queue.add(labyrinth[current.x - 1][current.y]);
+            labyrinth[current.x - 1][current.y].value = 3;
+        }
+
+        if (labyrinth[current.x + 1][current.y].value == 0 || labyrinth[current.x + 1][current.y].value == 5) {
+            labyrinth[current.x + 1][current.y].parent = current;
+            queue.add(labyrinth[current.x + 1][current.y]);
+            labyrinth[current.x + 1][current.y].value = 3;
+        }
+
+        if (labyrinth[current.x][current.y - 1].value == 0 || labyrinth[current.x][current.y - 1].value == 5) {
+            labyrinth[current.x][current.y - 1].parent = current;
+            queue.add(labyrinth[current.x][current.y - 1]);
+            labyrinth[current.x][current.y - 1].value = 3;
+        }
+
+        if (labyrinth[current.x][current.y + 1].value == 0 || labyrinth[current.x][current.y + 1].value == 5) {
+            labyrinth[current.x][current.y + 1].parent = current;
+            queue.add(labyrinth[current.x][current.y + 1]);
+            labyrinth[current.x][current.y + 1].value = 3;
+        }
     }
 }

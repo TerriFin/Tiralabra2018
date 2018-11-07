@@ -1,5 +1,6 @@
 package Tiralabra.gui;
 
+import Tiralabra.domain.Node;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
@@ -9,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class LabyrinthDrawer {
-    public static GridPane drawLabyrinth(int[][] labyrinth, int sceneWidth, int sceneHeight) {
+    public static GridPane drawLabyrinth(Node[][] labyrinth, int sceneWidth, int sceneHeight) {
         GridPane root = new GridPane();
         
         double rectangleWidth = sceneWidth / labyrinth.length;
@@ -21,19 +22,23 @@ public class LabyrinthDrawer {
                 rec.setWidth(rectangleWidth);
                 rec.setHeight(rectangleHeight * 0.75);
                 
-                if (labyrinth[y][x] == 0) {
+                if (labyrinth[x][y].value == 0) {
                     rec.setFill(Color.WHITE);
-                } else if (labyrinth[y][x] == 1) {
+                } else if (labyrinth[x][y].value == 1) {
                     rec.setFill(Color.BLACK);
-                } else if (labyrinth[y][x] == 2) {
+                } else if (labyrinth[x][y].value == 2) {
                     rec.setFill(Color.GREEN);
-                } else if (labyrinth[y][x] == 3) {
+                } else if (labyrinth[x][y].value == 3) {
                     rec.setFill(Color.GREENYELLOW);
+                } else if (labyrinth[x][y].value == 4) {
+                    rec.setFill(Color.YELLOW);
+                } else if (labyrinth[x][y].value == 6) {
+                    rec.setFill(Color.MAGENTA);
                 } else {
                     rec.setFill(Color.RED);
                 }
                 
-                root.add(rec, y, x);
+                root.add(rec, x, y);
                 GridPane.setHgrow(rec, Priority.ALWAYS);
             }
         }

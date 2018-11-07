@@ -1,14 +1,16 @@
 package Tiralabra.domain;
 
 public class Node {
-    private int x;
-    private int y;
-    private int value;
+    public int x;
+    public int y;
+    public int value;
+    public Node parent;
     
-    public Node(int x, int y, int value) {
+    public Node(int x, int y, int value, Node parent) {
         this.x = x;
         this.y = y;
         this.value = value;
+        this.parent = parent;
     }
     
     @Override
@@ -19,10 +21,6 @@ public class Node {
     @Override
     public boolean equals(Object object) {
         Node comparedNode = (Node) object;
-        if (comparedNode.hashCode() == this.hashCode()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.hashCode() == comparedNode.hashCode();
     }
 }
