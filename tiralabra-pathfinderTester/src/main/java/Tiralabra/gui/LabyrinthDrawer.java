@@ -13,14 +13,17 @@ public class LabyrinthDrawer {
     public static GridPane drawLabyrinth(Node[][] labyrinth, int sceneWidth, int sceneHeight) {
         GridPane root = new GridPane();
         
-        double rectangleWidth = sceneWidth / labyrinth.length;
-        double rectangleHeight = sceneHeight / labyrinth[0].length;
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10, 10, 10, 10));
+        
+        double rectangleWidth = (sceneWidth / labyrinth.length) * 0.75;
+        double rectangleHeight = (sceneHeight / labyrinth[0].length) * 0.75;
         
         for (int x = 0; x < labyrinth.length; x++) {
             for (int y = 0; y < labyrinth[0].length; y++) {
                 Rectangle rec = new Rectangle();
                 rec.setWidth(rectangleWidth);
-                rec.setHeight(rectangleHeight * 0.75);
+                rec.setHeight(rectangleHeight);
                 
                 if (labyrinth[x][y].value == 0) {
                     rec.setFill(Color.WHITE);
@@ -32,14 +35,13 @@ public class LabyrinthDrawer {
                     rec.setFill(Color.GREENYELLOW);
                 } else if (labyrinth[x][y].value == 4) {
                     rec.setFill(Color.YELLOW);
+                } else if (labyrinth[x][y].value == 5) {
+                    rec.setFill(Color.RED);
                 } else if (labyrinth[x][y].value == 6) {
                     rec.setFill(Color.MAGENTA);
-                } else {
-                    rec.setFill(Color.RED);
                 }
                 
                 root.add(rec, x, y);
-                GridPane.setHgrow(rec, Priority.ALWAYS);
             }
         }
 

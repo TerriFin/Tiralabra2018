@@ -1,6 +1,6 @@
 package Tiralabra.gui;
 
-import Tiralabra.domain.BreadthFirstSearch;
+import Tiralabra.domain.PathValidator;
 import Tiralabra.domain.LabyrinthGenerator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,10 +30,5 @@ public class Gui {
         
         root.setTop(LabyrinthDrawer.drawLabyrinth(LabyrinthGenerator.generateLabyrinth(labyrinthSize), screenWidth.intValue(), screenHeight.intValue()));
         root.setBottom(UserIO.getUserIO());
-        
-        
-        // THIS IS A TEST TO SEE HOW IT DRAWS, FEEL FREE TO DELETE
-        BreadthFirstSearch test = new BreadthFirstSearch(LabyrinthGenerator.generateLabyrinth(labyrinthSize));
-        root.setTop(LabyrinthDrawer.drawLabyrinth(test.checkIfThereIsPath(), screenWidth.intValue(), screenHeight.intValue()));
     }
 }
