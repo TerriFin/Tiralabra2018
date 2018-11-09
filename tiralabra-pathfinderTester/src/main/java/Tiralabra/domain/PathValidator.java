@@ -53,12 +53,16 @@ public class PathValidator {
     public void markPathToGoal(Node[][] labyrinth) {
         checkIfThereIsPath(labyrinth);
         
+        current.value = 5;
+        
         Node currentHere = current.parent;
         
         while(currentHere.parent != null) {
             labyrinth[currentHere.x][currentHere.y].value = 6;
             currentHere = currentHere.parent;
         }
+        
+        currentHere.value = 6;
     }
     
     private void checkAdjacentNodes(Node[][] labyrinth) {
