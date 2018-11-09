@@ -1,6 +1,6 @@
 # Overview
 
-In this project, i am going to make a program that generates labyrinths randomly, and then solves them using four different path-finding algorithms; breadth-first, depth-first, dijkstra's and A* algorithms.
+In this project, i am going to make a program that generates labyrinths randomly, and then solves them using three different path-finding algorithms; breadth-first, depth-first and A* algorithms.
 User can observe the labyrinth be solved in a gui, and after the program is done, user can observe how many steps each algorithm took to solve the labyrinth.
 After this, the program can be made to do it all over again without having to close it in between.
 
@@ -11,7 +11,7 @@ for breadth-first algorithm i am going to need a queue data-structure to parse t
 
 for depth-first algorithm i am going to need a stack data-structure to know what nodes come after the handled node.
 
-for dijkstra's and A* i am going to need a heap data-structure to keep an eye on the node with the lowest assosiated values.
+for A* i am going to need a heap data-structure to keep an eye on the node with the lowest assosiated values.
 
 Some possible extra ones if i get fancy with the labyrinth generation (the brute-force solution i have in mind currently does not require anything, but i might want to upgrade it at some point)
 
