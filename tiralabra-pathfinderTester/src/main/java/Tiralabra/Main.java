@@ -18,7 +18,7 @@ public class Main extends Application {
         
         Gui mainGui = new Gui(primaryStage.getWidth(), primaryStage.getHeight());
         primaryStage.setScene(mainGui.mainScene);
-        mainGui.generateNewMainScene(40);
+        mainGui.generateNewMainScene(30);
 
         primaryStage.show();
     }

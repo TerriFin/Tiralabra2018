@@ -25,7 +25,7 @@ public class LabyrinthGenerator {
             }
         }
         
-        validator.markPathToGoal(labyrinth);
+        //validator.markPathToGoal(labyrinth);
 
         return labyrinth;
     }
@@ -46,7 +46,7 @@ public class LabyrinthGenerator {
             labyrinth[side - 1][x].value = 1;
         }
 
-        labyrinth[1][1].value = 3;
+        labyrinth[1][1].value = 4;
         labyrinth[labyrinth.length - 2][labyrinth[0].length - 2].value = 5;
 
         return labyrinth;
