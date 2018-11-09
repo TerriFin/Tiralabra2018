@@ -3,6 +3,11 @@ package Tiralabra.domain;
 import java.util.ArrayDeque;
 import java.util.HashSet;
 
+/**
+ * Validates that there is a path and provides some other services for debugging
+ * 
+ * @author samisaukkonen
+ */
 public class PathValidator {
 
     private Node current;
@@ -10,7 +15,14 @@ public class PathValidator {
     private ArrayDeque<Node> queue;
     private HashSet<Node> closed;
 
+    /**
+     * Main method for this class, checks if it is possible to complete the labyrinth returning true or false accordingly.
+     * 
+     * @param labyrinth labyrinth to check
+     * @return returns true if it is possible to solve this labyrinth, false otherwise
+     */
     public boolean checkIfThereIsPath(Node[][] labyrinth) {
+        // We do not want to modify the labyrinth, so we use a queue and a set to keep track of where we have been.
         this.current = labyrinth[1][1];
         this.goal = labyrinth[labyrinth.length - 2][labyrinth[0].length - 2];
         this.queue = new ArrayDeque<>();
@@ -33,6 +45,11 @@ public class PathValidator {
         return false;
     }
 
+    /**
+     * Modifies the given *solvable* labyrinth, marking the shortest path to goal.
+     * 
+     * @param labyrinth labyrinth to modify
+     */
     public void markPathToGoal(Node[][] labyrinth) {
         checkIfThereIsPath(labyrinth);
         

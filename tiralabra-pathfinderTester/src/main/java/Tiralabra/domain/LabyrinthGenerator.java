@@ -2,8 +2,19 @@ package Tiralabra.domain;
 
 import java.util.Random;
 
+/**
+ * Generates labyrinths
+ * 
+ * @author samisaukkonen
+ */
 public class LabyrinthGenerator {
 
+    /**
+     * Generates a new labyrinth (in an extremely inefficient way)
+     * 
+     * @param side size of the side of the labyrinth
+     * @return finished Node[][] labyrinth that is always solvable
+     */
     public static Node[][] generateLabyrinth(int side) {
         Node[][] labyrinth = prepareNewLabyrinth(side);
 
@@ -30,6 +41,12 @@ public class LabyrinthGenerator {
         return labyrinth;
     }
 
+    /**
+     * Prepares new labyrinth by initiating all nodes, placing walls and start/end point
+     * 
+     * @param side size of the labyrinth to be generated
+     * @return returns initiated labyrinth
+     */
     private static Node[][] prepareNewLabyrinth(int side) {
         Node[][] labyrinth = new Node[side][side];
 

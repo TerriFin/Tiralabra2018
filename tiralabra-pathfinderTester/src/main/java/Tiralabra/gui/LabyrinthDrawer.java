@@ -3,13 +3,34 @@ package Tiralabra.gui;
 import Tiralabra.domain.Node;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * All things related to drawing labyrinths
+ * 
+ * @author samisaukkonen
+ */
 public class LabyrinthDrawer {
+    
+    /**
+     * Draws a labyrinth based on parameters given to it, each node has a .value modifier, 
+     * which determines the color of the cell in the labyrinth. The colors go as follows;
+     * 
+     * 0 - White - Open space
+     * 1 - Black - Wall
+     * 2 - Green - Node that has been processed
+     * 3 - GreenYellow - Node that is waiting to be processed
+     * 4 - Yellow - Node currently being processed
+     * 5 - Red - Goal
+     * 6 - Magenta - Found path
+     * 
+     * @param labyrinth the labyrinth that is going to be drawn
+     * @param sceneWidth current screen width, the labyrinth is going to be sized appropriately
+     * @param sceneHeight current screen height, the labyrinth is going to be sized appropriately
+     * @return Returns a GridPane containing the labyrinth adjusted for the current window size.
+     */
     public static GridPane drawLabyrinth(Node[][] labyrinth, int sceneWidth, int sceneHeight) {
         GridPane root = new GridPane();
         
