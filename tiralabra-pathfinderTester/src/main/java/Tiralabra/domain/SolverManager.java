@@ -12,25 +12,24 @@ import Tiralabra.domain.solvers.DepthFirst;
 public class SolverManager {
     public Node[][] originalLabyrinth;
     
-    private BreadthFirst breadthFirst;
-    private DepthFirst DepthFirst;
-    private AStar AStar;
+    private final BreadthFirst breadthFirst;
+    private final DepthFirst DepthFirst;
+    private final AStar AStar;
 
     /**
-     * 
      * @param labyrinth Labyrinth that is going to be solved with the different algorithms
      */
     public SolverManager(Node[][] labyrinth) {
-        this.originalLabyrinth = labyrinth;
+        this.originalLabyrinth = deepClone(labyrinth);
         
         this.breadthFirst = new BreadthFirst(deepClone(labyrinth));
         this.DepthFirst = new DepthFirst(deepClone(labyrinth));
-        this.AStar = new AStar(labyrinth);
+        this.AStar = new AStar(deepClone(labyrinth));
     }
 
     /**
      * Returns next step in breadth-first algorithm, when done marks the found path and sends signal that
-     * this is in fact the last output from this algorithm
+     * this is in fact the last output from this algorithm also always passes steps taken in this algorithm and final path length
      * 
      * @return returns a SolverToAnimator class object, which just contains the labyrinth and a signal
      * telling if this labyrinth is completed.
@@ -45,6 +44,13 @@ public class SolverManager {
         return new SolverToAnimator(breadthFirst.current, breadthFirst.labyrinth, isLast, breadthFirst.steps, 0);
     }
     
+    /**
+     * Returns next step in depth-first algorithm, when done marks the found path and sends signal that
+     * this is in fact the last output from this algorithm also always passes steps taken in this algorithm and final path length
+     * 
+     * @return returns a SolverToAnimator class object, which just contains the labyrinth and a signal
+     * telling if this labyrinth is completed.
+     */
     public SolverToAnimator getNextDepth() {
         boolean isLast = DepthFirst.processStep();
         
@@ -55,6 +61,13 @@ public class SolverManager {
         return new SolverToAnimator(DepthFirst.current, DepthFirst.labyrinth, isLast, DepthFirst.steps, 0);
     }
     
+    /**
+     * Returns next step in star-first algorithm, when done marks the found path and sends signal that
+     * this is in fact the last output from this algorithm also always passes steps taken in this algorithm and final path length
+     * 
+     * @return returns a SolverToAnimator class object, which just contains the labyrinth and a signal
+     * telling if this labyrinth is completed.
+     */
     public SolverToAnimator getNextStar() {
         boolean isLast = AStar.processStep();
         

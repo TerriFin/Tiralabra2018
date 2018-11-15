@@ -2,7 +2,6 @@ package Tiralabra;
 
 import Tiralabra.gui.Gui;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -17,7 +16,7 @@ public class Main extends Application {
         primaryStage.setHeight(400);
         
         Gui mainGui = new Gui(primaryStage.getWidth(), primaryStage.getHeight());
-        mainGui.generateNewMainScene(30);
+        mainGui.generateNewMainScene(15);
         primaryStage.setScene(mainGui.mainScene);
         
 

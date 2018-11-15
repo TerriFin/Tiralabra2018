@@ -25,16 +25,34 @@ public class UserIO {
     private Label starSteps = new Label("0");
     private Label starPath = new Label("0");
     
+    /**
+     * Updates breath-first related output
+     * 
+     * @param newSteps new amount of steps used in this algorithm
+     * @param newPath new path length found in this algorithm
+     */
     public void updateBreath(int newSteps, int newPath) {
         breadthSteps.setText(newSteps + "");
         breadthPath.setText(newPath + "");
     }
     
+    /**
+     * Updates depth-first related output
+     * 
+     * @param newSteps new amount of steps used in this algorithm
+     * @param newPath new path length found in this algorithm
+     */
     public void updateDepth(int newSteps, int newPath) {
         depthSteps.setText(newSteps + "");
         depthPath.setText(newPath + "");
     }
     
+    /**
+     * Updates aStar related output
+     * 
+     * @param newSteps new amount of steps used in this algorithm
+     * @param newPath new path length found in this algorithm
+     */
     public void updateStar(int newSteps, int newPath) {
         starSteps.setText(newSteps + "");
         starPath.setText(newPath + "");

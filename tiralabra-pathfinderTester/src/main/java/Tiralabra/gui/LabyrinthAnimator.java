@@ -1,5 +1,6 @@
 package Tiralabra.gui;
 
+import Tiralabra.domain.Node;
 import Tiralabra.domain.SolverManager;
 import Tiralabra.domain.SolverToAnimator;
 import javafx.animation.KeyFrame;
@@ -9,38 +10,37 @@ import javafx.util.Duration;
 /**
  * Responsible for animating the labyrinth
  * Uses three different timelines, each responsible for one algorithm, when this animator
- * gets a signal from solverManager that current algorithm is done, it shows the found path for three seconds
- * and starts next algorithm. On last algorithm it stops and just shows the last found path.
+ * gets a signal from solverManager that current algorithm is done, it shows the found path for four seconds
+ * and then starts next algorithm. On last algorithm it stops and just shows the last found path
  * 
  * @author samisaukkonen
  */
 public class LabyrinthAnimator {
-
-    private SolverManager solverManager;
     private Gui gui;
     private UserIO io;
     
     private boolean depthFirst;
-    private boolean AStarFirst;
+    private boolean starFirst;
+    
+    private SolverManager solverManager;
 
     public Timeline breadthTimeline;
     public Timeline depthTimeline;
     public Timeline starTimeline;
 
     /**
-     * 
-     * @param solverManager SolverManager for this animator, animator gets the half-completed
-     * labyrinths from this class, and just draws them until it gets a signal to start over with a different algorithm
-     * @param gui Gui that this class is nested in, needed to gain access to .setNewLabyrinth-method
-     * for placing new labyrinth there
+     * @param labyrinth Labyrinth that is going to be animated, is going to be passed on to a new SolverManager
+     * that is going to be destroyed when stop() is called.
+     * @param gui Gui that this class is nested in, needed to gain access to .setNewLabyrinth and .updateLabyrinth -methods
      */
-    public LabyrinthAnimator(SolverManager solverManager, Gui gui, UserIO io) {
-        this.solverManager = solverManager;
+    public LabyrinthAnimator(Node[][] labyrinth, UserIO io, Gui gui) {
         this.gui = gui;
         this.io = io;
         
         this.depthFirst = true;
-        this.AStarFirst = true;
+        this.starFirst = true;
+        
+        this.solverManager = new SolverManager(labyrinth);
 
         this.breadthTimeline = new Timeline(new KeyFrame(Duration.millis(40), e -> {
             SolverToAnimator input = this.solverManager.getNextBreadth();
@@ -72,9 +72,9 @@ public class LabyrinthAnimator {
         }));
         
         this.starTimeline = new Timeline(new KeyFrame(Duration.millis(40), e -> {
-            if (AStarFirst) {
+            if (starFirst) {
                 this.gui.setNewLabyrinth(solverManager.originalLabyrinth);
-                AStarFirst = false;
+                starFirst = false;
             }
             
             SolverToAnimator input = this.solverManager.getNextStar();
@@ -90,10 +90,10 @@ public class LabyrinthAnimator {
         this.breadthTimeline.setDelay(Duration.seconds(2));
         this.breadthTimeline.setCycleCount(Timeline.INDEFINITE);
         
-        this.depthTimeline.setDelay(Duration.seconds(3));
+        this.depthTimeline.setDelay(Duration.seconds(4));
         this.depthTimeline.setCycleCount(Timeline.INDEFINITE);
         
-        this.starTimeline.setDelay(Duration.seconds(3));
+        this.starTimeline.setDelay(Duration.seconds(4));
         this.starTimeline.setCycleCount(Timeline.INDEFINITE);
     }
 
@@ -105,15 +105,17 @@ public class LabyrinthAnimator {
     }
     
     /**
-     * Stops the animation
-     * 
-     * --- TO DO ---
-     * Check if the old timelines stay and if so how to get rid of them
-     * -------------
+     * Stops and destroys generated resources, hopefully freeing them
      */
     public void stop() {
         breadthTimeline.stop();
         depthTimeline.stop();
         starTimeline.stop();
+        
+        breadthTimeline = null;
+        depthTimeline = null;
+        starTimeline = null;
+        
+        solverManager = null;
     }
 }

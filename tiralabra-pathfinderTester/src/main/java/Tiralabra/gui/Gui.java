@@ -14,21 +14,17 @@ import javafx.scene.layout.BorderPane;
  */
 public class Gui {
 
-    private BorderPane root;
-    
-    private LabyrinthAnimator animator;
-    private LabyrinthDrawer drawer;
+    private final BorderPane root;
+    private final LabyrinthDrawer drawer;
 
     public Scene mainScene;
 
     /**
-     * 
      * @param screenWidth primaryStage width
      * @param screenHeight  primaryStage height
      */
     public Gui(double screenWidth, double screenHeight) {
         this.root = new BorderPane();
-        
         this.drawer = new LabyrinthDrawer();
         
         this.mainScene = new Scene(this.root, screenWidth, screenHeight);
@@ -46,8 +42,8 @@ public class Gui {
         setNewLabyrinth(labyrinth);
         
         UserIO io = new UserIO();
-
-        animator = new LabyrinthAnimator(new SolverManager(labyrinth), this, io);
+        
+        LabyrinthAnimator animator = new LabyrinthAnimator(labyrinth, io, this);
 
         root.setBottom(io.getUserInput(this, animator));
 
@@ -66,7 +62,12 @@ public class Gui {
 
         root.setCenter(drawer.setLabyrinth(labyrinth, screenWidth.intValue(), screenHeight.intValue()));
     }
-    
+    /**
+     * Updates only the previously updated node, current node and its surrounding nodes.
+     * 
+     * @param labyrinth labyrinth from which surrounding nodes are taken
+     * @param node node to be updated, also updates surrounding nodes and the previously updated node
+     */
     public void updateLabyrinth(Node[][] labyrinth, Node node) {
         Double screenWidth = mainScene.getWidth();
         Double screenHeight = mainScene.getHeight();

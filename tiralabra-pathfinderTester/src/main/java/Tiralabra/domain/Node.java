@@ -29,10 +29,19 @@ public class Node implements Comparable<Node> {
         this.shortestPath = Integer.MAX_VALUE;
     }
     
+    /**
+     * return current path length plus length to goal
+     * 
+     * @return current path length plus length to goal
+     */
     public int getCombinedPosValue() {
         return shortestPath + distanceToGoal;
     }
     
+    /**
+     * @param target target node
+     * @return distance to targetNode from this node
+     */
     public int distanceToNode(Node target) {
         int currentDistance = x + y;
         int currentTargetDistance = target.x + target.y;

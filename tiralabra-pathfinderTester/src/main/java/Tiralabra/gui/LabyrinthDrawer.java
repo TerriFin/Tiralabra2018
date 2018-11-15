@@ -59,6 +59,15 @@ public class LabyrinthDrawer {
         return root;
     }
 
+    /**
+     * updates only the lastly modified node, given node and its surroundings
+     * 
+     * @param labyrinth labyrinth to draw from
+     * @param sceneWidth scene width
+     * @param sceneHeight scene height
+     * @param toUpdate node to update
+     * @return return a modified GridPane with updated labyrinth
+     */
     public GridPane updateLabyrinth(Node[][] labyrinth, int sceneWidth, int sceneHeight, Node toUpdate) {
         if (lastSceneWidth != sceneWidth) {
             lastSceneWidth = sceneWidth;
