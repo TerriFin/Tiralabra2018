@@ -24,4 +24,8 @@ jacocoTestReport {
     }
 }
 
+test {
+    testLogging.showStandardStreams = true
+}
+
 check.dependsOn jacocoTestReport

@@ -32,7 +32,12 @@ public class AStar {
         this.steps++;
         
         current.value = 2;
-        current = heap.poll();
+        if (!heap.isEmpty()) {
+            current = heap.poll();
+        } else {
+            return false;
+        }
+        
         current.value = 4;
 
         if (current.equals(goal)) {

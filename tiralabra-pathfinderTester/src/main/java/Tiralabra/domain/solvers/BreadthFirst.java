@@ -29,7 +29,12 @@ public class BreadthFirst {
         this.steps++;
         
         current.value = 2;
-        current = queue.poll();
+        if (!queue.isEmpty()) {
+            current = queue.poll();
+        } else {
+            return false;
+        }
+        
         current.value = 4;
 
         if (current.equals(goal)) {

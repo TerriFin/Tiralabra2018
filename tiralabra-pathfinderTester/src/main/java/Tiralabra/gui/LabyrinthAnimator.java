@@ -47,7 +47,7 @@ public class LabyrinthAnimator {
             this.gui.updateLabyrinth(input.labyrinth, input.node);
             this.io.updateBreath(input.steps, input.pathLength);
 
-            if (input.lastFrame) {
+            if (input.labyrinthSolved) {
                 this.gui.setNewLabyrinth(input.labyrinth);
                 this.breadthTimeline.stop();
                 this.depthTimeline.play();
@@ -64,7 +64,7 @@ public class LabyrinthAnimator {
             this.gui.updateLabyrinth(input.labyrinth, input.node);
             this.io.updateDepth(input.steps, input.pathLength);
 
-            if (input.lastFrame) {
+            if (input.labyrinthSolved) {
                 this.gui.setNewLabyrinth(input.labyrinth);
                 this.depthTimeline.stop();
                 this.starTimeline.play();
@@ -81,7 +81,7 @@ public class LabyrinthAnimator {
             this.gui.updateLabyrinth(input.labyrinth, input.node);
             this.io.updateStar(input.steps, input.pathLength);
 
-            if (input.lastFrame) {
+            if (input.labyrinthSolved) {
                 this.gui.setNewLabyrinth(input.labyrinth);
                 this.starTimeline.stop();
             }

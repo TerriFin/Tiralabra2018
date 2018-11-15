@@ -29,7 +29,12 @@ public class DepthFirst {
         this.steps++;
         
         current.value = 2;
-        current = stack.pop();
+        if (!stack.isEmpty()) {
+            current = stack.pop();
+        } else {
+            return false;
+        }
+        
         current.value = 4;
 
         if (current.equals(goal)) {
