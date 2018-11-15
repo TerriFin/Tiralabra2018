@@ -10,6 +10,8 @@ import Tiralabra.domain.solvers.DepthFirst;
  * @author samisaukkonen
  */
 public class SolverManager {
+    public Node[][] originalLabyrinth;
+    
     private BreadthFirst breadthFirst;
     private DepthFirst DepthFirst;
     private AStar AStar;
@@ -19,7 +21,11 @@ public class SolverManager {
      * @param labyrinth Labyrinth that is going to be solved with the different algorithms
      */
     public SolverManager(Node[][] labyrinth) {
-        this.breadthFirst = new BreadthFirst(labyrinth.clone());
+        this.originalLabyrinth = labyrinth;
+        
+        this.breadthFirst = new BreadthFirst(deepClone(labyrinth));
+        this.DepthFirst = new DepthFirst(deepClone(labyrinth));
+        this.AStar = new AStar(labyrinth);
     }
 
     /**
@@ -33,18 +39,41 @@ public class SolverManager {
         boolean isLast = breadthFirst.processStep();
         
         if (isLast) {
-            breadthFirst.MarkPathToCurrent();
-            return new SolverToAnimator(breadthFirst.labyrinth, isLast);
+            return new SolverToAnimator(breadthFirst.current, breadthFirst.labyrinth, isLast, breadthFirst.steps, breadthFirst.MarkPathToCurrent());
         }
         
-        return new SolverToAnimator(breadthFirst.labyrinth, isLast);
+        return new SolverToAnimator(breadthFirst.current, breadthFirst.labyrinth, isLast, breadthFirst.steps, 0);
     }
     
     public SolverToAnimator getNextDepth() {
-        return null;
+        boolean isLast = DepthFirst.processStep();
+        
+        if (isLast) {
+            return new SolverToAnimator(DepthFirst.current, DepthFirst.labyrinth, isLast, DepthFirst.steps, DepthFirst.markPathToCurrent());
+        }
+        
+        return new SolverToAnimator(DepthFirst.current, DepthFirst.labyrinth, isLast, DepthFirst.steps, 0);
     }
     
     public SolverToAnimator getNextStar() {
-        return null;
+        boolean isLast = AStar.processStep();
+        
+        if (isLast) {
+            return new SolverToAnimator(AStar.current, AStar.labyrinth, isLast, AStar.steps, AStar.markPathToCurrent());
+        }
+        
+        return new SolverToAnimator(AStar.current, AStar.labyrinth, isLast, AStar.steps, 0);
+    }
+    
+    private Node[][] deepClone(Node[][] labyrinth) {
+        Node[][] newLabyrinth = new Node[labyrinth.length][labyrinth[0].length];
+        
+        for (int x = 0; x < labyrinth.length; x++) {
+            for (int y = 0; y < labyrinth[0].length; y++) {
+                newLabyrinth[x][y] = new Node(labyrinth[x][y].x, labyrinth[x][y].y, labyrinth[x][y].value, null);
+            }
+        }
+        
+        return newLabyrinth;
     }
 }

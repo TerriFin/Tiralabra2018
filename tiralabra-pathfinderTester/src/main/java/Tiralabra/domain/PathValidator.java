@@ -2,6 +2,7 @@ package Tiralabra.domain;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
+import java.util.Stack;
 
 /**
  * Validates that there is a path and provides some other services for debugging
@@ -12,7 +13,7 @@ public class PathValidator {
 
     private Node current;
     private Node goal;
-    private ArrayDeque<Node> queue;
+    private Stack<Node> stack;
     private HashSet<Node> closed;
 
     /**
@@ -25,15 +26,15 @@ public class PathValidator {
         // We do not want to modify the labyrinth, so we use a queue and a set to keep track of where we have been.
         this.current = labyrinth[1][1];
         this.goal = labyrinth[labyrinth.length - 2][labyrinth[0].length - 2];
-        this.queue = new ArrayDeque<>();
+        this.stack = new Stack<>();
         this.closed = new HashSet<>();
 
-        this.queue.add(current);
+        this.stack.add(current);
         this.closed.add(current);
         
         // Start the actual algorithm
-        while (!queue.isEmpty()) {
-            current = queue.poll();
+        while (!stack.isEmpty()) {
+            current = stack.pop();
 
             if (current.equals(goal)) {
                 return true;
@@ -68,25 +69,25 @@ public class PathValidator {
     private void checkAdjacentNodes(Node[][] labyrinth) {
         if (labyrinth[current.x - 1][current.y].value != 1 && !closed.contains(labyrinth[current.x - 1][current.y])) {
             labyrinth[current.x - 1][current.y].parent = current;
-            queue.add(labyrinth[current.x - 1][current.y]);
+            stack.push(labyrinth[current.x - 1][current.y]);
             closed.add(labyrinth[current.x - 1][current.y]);
         }
 
         if (labyrinth[current.x + 1][current.y].value != 1 && !closed.contains(labyrinth[current.x + 1][current.y])) {
             labyrinth[current.x + 1][current.y].parent = current;
-            queue.add(labyrinth[current.x + 1][current.y]);
+            stack.push(labyrinth[current.x + 1][current.y]);
             closed.add(labyrinth[current.x + 1][current.y]);
         }
 
         if (labyrinth[current.x][current.y - 1].value != 1 && !closed.contains(labyrinth[current.x][current.y - 1])) {
             labyrinth[current.x][current.y - 1].parent = current;
-            queue.add(labyrinth[current.x][current.y - 1]);
+            stack.push(labyrinth[current.x][current.y - 1]);
             closed.add(labyrinth[current.x][current.y - 1]);
         }
 
         if (labyrinth[current.x][current.y + 1].value != 1 && !closed.contains(labyrinth[current.x][current.y + 1])) {
             labyrinth[current.x][current.y + 1].parent = current;
-            queue.add(labyrinth[current.x][current.y + 1]);
+            stack.push(labyrinth[current.x][current.y + 1]);
             closed.add(labyrinth[current.x][current.y + 1]);
         }
     }

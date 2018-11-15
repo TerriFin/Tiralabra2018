@@ -5,11 +5,13 @@ package Tiralabra.domain;
  * 
  * @author samisaukkonen
  */
-public class Node {
+public class Node implements Comparable<Node> {
     public int x;
     public int y;
     public int value;
     public Node parent;
+    public int distanceToGoal;
+    public int shortestPath;
     
     /**
      * 
@@ -23,6 +25,19 @@ public class Node {
         this.y = y;
         this.value = value;
         this.parent = parent;
+        this.distanceToGoal = Integer.MAX_VALUE;
+        this.shortestPath = Integer.MAX_VALUE;
+    }
+    
+    public int getCombinedPosValue() {
+        return shortestPath + distanceToGoal;
+    }
+    
+    public int distanceToNode(Node target) {
+        int currentDistance = x + y;
+        int currentTargetDistance = target.x + target.y;
+        
+        return Math.abs(currentTargetDistance - currentDistance);
     }
     
     @Override
@@ -34,5 +49,10 @@ public class Node {
     public boolean equals(Object object) {
         Node comparedNode = (Node) object;
         return this.hashCode() == comparedNode.hashCode();
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return getCombinedPosValue() - o.getCombinedPosValue();
     }
 }

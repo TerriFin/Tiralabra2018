@@ -15,7 +15,9 @@ import javafx.scene.layout.BorderPane;
 public class Gui {
 
     private BorderPane root;
+    
     private LabyrinthAnimator animator;
+    private LabyrinthDrawer drawer;
 
     public Scene mainScene;
 
@@ -26,6 +28,9 @@ public class Gui {
      */
     public Gui(double screenWidth, double screenHeight) {
         this.root = new BorderPane();
+        
+        this.drawer = new LabyrinthDrawer();
+        
         this.mainScene = new Scene(this.root, screenWidth, screenHeight);
     }
 
@@ -39,10 +44,12 @@ public class Gui {
     public void generateNewMainScene(int labyrinthSize) {
         Node[][] labyrinth = LabyrinthGenerator.generateLabyrinth(labyrinthSize);
         setNewLabyrinth(labyrinth);
+        
+        UserIO io = new UserIO();
 
-        animator = new LabyrinthAnimator(new SolverManager(labyrinth), this);
+        animator = new LabyrinthAnimator(new SolverManager(labyrinth), this, io);
 
-        root.setBottom(UserIO.getUserInput(this, animator));
+        root.setBottom(io.getUserInput(this, animator));
 
         animator.startAnimation();
     }
@@ -57,6 +64,13 @@ public class Gui {
         Double screenWidth = mainScene.getWidth();
         Double screenHeight = mainScene.getHeight();
 
-        root.setCenter(LabyrinthDrawer.drawLabyrinth(labyrinth, screenWidth.intValue(), screenHeight.intValue()));
+        root.setCenter(drawer.setLabyrinth(labyrinth, screenWidth.intValue(), screenHeight.intValue()));
+    }
+    
+    public void updateLabyrinth(Node[][] labyrinth, Node node) {
+        Double screenWidth = mainScene.getWidth();
+        Double screenHeight = mainScene.getHeight();
+
+        root.setCenter(drawer.updateLabyrinth(labyrinth, screenWidth.intValue(), screenHeight.intValue(), node));
     }
 }

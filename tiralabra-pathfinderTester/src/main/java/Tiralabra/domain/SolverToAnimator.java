@@ -8,16 +8,21 @@ import Tiralabra.domain.Node;
  * @author samisaukkonen
  */
 public class SolverToAnimator {
+    public Node node;
     public Node[][] labyrinth;
     public boolean lastFrame;
-    
+    public int steps;
+    public int pathLength;
     /**
      * 
      * @param labyrinth labyrinth to return, can be "completed" with marked found path
      * @param lastFrame boolean stating if this is the last (completed) labyrinth from this algorithm
      */
-    public SolverToAnimator(Node[][] labyrinth, boolean lastFrame) {
+    public SolverToAnimator(Node node, Node[][] labyrinth, boolean lastFrame, int steps, int pathLength) {
+        this.node = node;
         this.labyrinth = labyrinth;
         this.lastFrame = lastFrame;
+        this.steps = steps;
+        this.pathLength = pathLength;
     }
 }

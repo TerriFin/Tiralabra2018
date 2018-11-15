@@ -7,9 +7,11 @@ public class BreadthFirst {
 
     public Node[][] labyrinth;
 
-    private Node current;
+    public Node current;
     private Node goal;
     private ArrayDeque<Node> queue;
+    
+    public int steps;
 
     public BreadthFirst(Node[][] labyrinth) {
         this.labyrinth = labyrinth;
@@ -19,9 +21,13 @@ public class BreadthFirst {
         this.queue = new ArrayDeque<>();
 
         this.queue.add(current);
+        
+        this.steps = 0;
     }
 
     public boolean processStep() {
+        this.steps++;
+        
         current.value = 2;
         current = queue.poll();
         current.value = 4;
@@ -31,19 +37,25 @@ public class BreadthFirst {
         }
 
         checkAdjacentNodes();
+        
         return false;
     }
 
-    public void MarkPathToCurrent() {
+    public int MarkPathToCurrent() {
+        int currentPathLength = 1;
+        
         current.value = 5;
         Node currentHere = current.parent;
 
         while (currentHere.parent != null) {
+            currentPathLength++;
             labyrinth[currentHere.x][currentHere.y].value = 6;
             currentHere = currentHere.parent;
         }
         
         currentHere.value = 6;
+        
+        return currentPathLength;
     }
 
     private void checkAdjacentNodes() {
