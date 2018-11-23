@@ -1,7 +1,7 @@
 package Tiralabra.domain.solvers;
 
+import Tiralabra.domain.DataStructures.Stack;
 import Tiralabra.domain.Node;
-import java.util.Stack;
 
 public class DepthFirst {
 
@@ -18,9 +18,9 @@ public class DepthFirst {
 
         this.current = this.labyrinth[1][1];
         this.goal = this.labyrinth[this.labyrinth.length - 2][this.labyrinth[0].length - 2];
-        this.stack = new Stack<>();
+        this.stack = new Stack<Node>(Node.class);
 
-        this.stack.push(this.current);
+        this.stack.put(this.current);
         
         this.steps = 0;
     }
@@ -67,25 +67,25 @@ public class DepthFirst {
     private void checkAdjacentNodes() {
         if (labyrinth[current.x - 1][current.y].value == 0 || labyrinth[current.x - 1][current.y].value == 5) {
             labyrinth[current.x - 1][current.y].parent = current;
-            stack.push(labyrinth[current.x - 1][current.y]);
+            stack.put(labyrinth[current.x - 1][current.y]);
             labyrinth[current.x - 1][current.y].value = 3;
         }
 
         if (labyrinth[current.x + 1][current.y].value == 0 || labyrinth[current.x + 1][current.y].value == 5) {
             labyrinth[current.x + 1][current.y].parent = current;
-            stack.push(labyrinth[current.x + 1][current.y]);
+            stack.put(labyrinth[current.x + 1][current.y]);
             labyrinth[current.x + 1][current.y].value = 3;
         }
 
         if (labyrinth[current.x][current.y - 1].value == 0 || labyrinth[current.x][current.y - 1].value == 5) {
             labyrinth[current.x][current.y - 1].parent = current;
-            stack.push(labyrinth[current.x][current.y - 1]);
+            stack.put(labyrinth[current.x][current.y - 1]);
             labyrinth[current.x][current.y - 1].value = 3;
         }
 
         if (labyrinth[current.x][current.y + 1].value == 0 || labyrinth[current.x][current.y + 1].value == 5) {
             labyrinth[current.x][current.y + 1].parent = current;
-            stack.push(labyrinth[current.x][current.y + 1]);
+            stack.put(labyrinth[current.x][current.y + 1]);
             labyrinth[current.x][current.y + 1].value = 3;
         }
     }

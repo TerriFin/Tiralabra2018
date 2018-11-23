@@ -28,17 +28,6 @@ public class Queue<T> {
         this.size = 0;
     }
 
-    public Queue(Class<T> t, int startSize) {
-        this.t = t;
-        
-        this.head = 0;
-        this.tail = 0;
-        this.array = (T[]) Array.newInstance(this.t, startSize);
-        this.length = startSize;
-        
-        this.size = 0;
-    }
-
     public void put(T obj) {
         if (tail != length && array[tail] != null) {
             doubleArraySize();

@@ -1,6 +1,7 @@
 package Tiralabra;
 
 import Tiralabra.domain.DataStructures.Queue;
+import Tiralabra.domain.DataStructures.Stack;
 
 /**
  *
@@ -12,29 +13,17 @@ public class TestMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Queue<Integer> queue = new Queue<Integer>(Integer.class);
+        Stack<Integer> stack = new Stack<Integer>(Integer.class);
         
-        queue.put(1);
-        System.out.println(queue);
+        for (int i = 0; i < 50; i++) {
+            stack.put(i);
+        }
         
-        queue.poll();
-        System.out.println(queue);
-        
-        queue.put(2);
-        System.out.println(queue);
-        
-        queue.poll();
-        System.out.println(queue);
-        
-        queue.put(3);
-        System.out.println(queue);
-        
-        queue.poll();
-        System.out.println(queue);
-        
-        queue.put(4);
-        System.out.println(queue);
-        
-        System.out.println(queue.getSize());
+        for (int i = 0; i < 50; i++) {
+            int expected = 50 - i;
+            int actual = stack.pop();
+            
+            System.out.println(expected + ", " + actual);
+        }
     }
 }

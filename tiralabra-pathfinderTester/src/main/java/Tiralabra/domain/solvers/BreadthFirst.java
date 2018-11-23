@@ -2,7 +2,6 @@ package Tiralabra.domain.solvers;
 
 import Tiralabra.domain.DataStructures.Queue;
 import Tiralabra.domain.Node;
-import java.util.ArrayDeque;
 
 public class BreadthFirst {
 
