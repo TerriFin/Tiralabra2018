@@ -21,3 +21,5 @@ In this project i smash together a labyrinth generator and three labyrinth solve
 [Weekreport3](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/weekReport3.md)
 
 [Weekreport4](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/weekReport4.md)
+
+[Weekreport5](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/weekReport5.md)
