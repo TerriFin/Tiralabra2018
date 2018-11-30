@@ -1,7 +1,8 @@
 package Tiralabra.domain.solvers;
 
+import Tiralabra.domain.DataStructures.Heap;
+import Tiralabra.domain.DataStructures.Stack;
 import Tiralabra.domain.Node;
-import java.util.PriorityQueue;
 
 public class AStar {
 
@@ -9,7 +10,7 @@ public class AStar {
 
     public Node current;
     private Node goal;
-    private PriorityQueue<Node> heap;
+    private Heap<Node> Heap;
     
     public int steps;
 
@@ -18,12 +19,12 @@ public class AStar {
 
         this.current = this.labyrinth[1][1];
         this.goal = this.labyrinth[this.labyrinth.length - 2][this.labyrinth[0].length - 2];
-        this.heap = new PriorityQueue<>();
+        this.Heap = new Heap<Node>(Node.class);
 
         this.current.shortestPath = 0;
         this.current.distanceToGoal = this.current.distanceToNode(this.goal);
 
-        this.heap.add(this.current);
+        this.Heap.add(this.current);
         
         this.steps = 0;
     }
@@ -32,8 +33,8 @@ public class AStar {
         this.steps++;
         
         current.value = 2;
-        if (!heap.isEmpty()) {
-            current = heap.poll();
+        if (!Heap.isEmpty()) {
+            current = Heap.poll();
         } else {
             return false;
         }
@@ -72,14 +73,14 @@ public class AStar {
             labyrinth[current.x - 1][current.y].parent = current;
             labyrinth[current.x - 1][current.y].shortestPath = current.shortestPath + 1;
             labyrinth[current.x - 1][current.y].distanceToGoal = labyrinth[current.x - 1][current.y].distanceToNode(goal);
-            heap.add(labyrinth[current.x - 1][current.y]);
+            Heap.add(labyrinth[current.x - 1][current.y]);
             labyrinth[current.x - 1][current.y].value = 3;
         } else if (labyrinth[current.x - 1][current.y].value == 3) {
             if (labyrinth[current.x - 1][current.y].shortestPath > current.shortestPath + 1) {
                 labyrinth[current.x - 1][current.y].parent = current;
                 labyrinth[current.x - 1][current.y].shortestPath = current.shortestPath + 1;
-                heap.remove(labyrinth[current.x - 1][current.y]);
-                heap.add(labyrinth[current.x - 1][current.y]);
+                Heap.remove(labyrinth[current.x - 1][current.y]);
+                Heap.add(labyrinth[current.x - 1][current.y]);
             }
         }
 
@@ -87,14 +88,14 @@ public class AStar {
             labyrinth[current.x + 1][current.y].parent = current;
             labyrinth[current.x + 1][current.y].shortestPath = current.shortestPath + 1;
             labyrinth[current.x + 1][current.y].distanceToGoal = labyrinth[current.x + 1][current.y].distanceToNode(goal);
-            heap.add(labyrinth[current.x + 1][current.y]);
+            Heap.add(labyrinth[current.x + 1][current.y]);
             labyrinth[current.x + 1][current.y].value = 3;
         } else if (labyrinth[current.x + 1][current.y].value == 3) {
             if (labyrinth[current.x + 1][current.y].shortestPath > current.shortestPath + 1) {
                 labyrinth[current.x + 1][current.y].parent = current;
                 labyrinth[current.x + 1][current.y].shortestPath = current.shortestPath + 1;
-                heap.remove(labyrinth[current.x + 1][current.y]);
-                heap.add(labyrinth[current.x + 1][current.y]);
+                Heap.remove(labyrinth[current.x + 1][current.y]);
+                Heap.add(labyrinth[current.x + 1][current.y]);
             }
         }
 
@@ -102,14 +103,14 @@ public class AStar {
             labyrinth[current.x][current.y - 1].parent = current;
             labyrinth[current.x][current.y - 1].shortestPath = current.shortestPath + 1;
             labyrinth[current.x][current.y - 1].distanceToGoal = labyrinth[current.x][current.y - 1].distanceToNode(goal);
-            heap.add(labyrinth[current.x][current.y - 1]);
+            Heap.add(labyrinth[current.x][current.y - 1]);
             labyrinth[current.x][current.y - 1].value = 3;
         } else if (labyrinth[current.x][current.y - 1].value == 3) {
             if (labyrinth[current.x][current.y - 1].shortestPath > current.shortestPath + 1) {
                 labyrinth[current.x][current.y - 1].parent = current;
                 labyrinth[current.x][current.y - 1].shortestPath = current.shortestPath + 1;
-                heap.remove(labyrinth[current.x][current.y - 1]);
-                heap.add(labyrinth[current.x][current.y - 1]);
+                Heap.remove(labyrinth[current.x][current.y - 1]);
+                Heap.add(labyrinth[current.x][current.y - 1]);
             }
         }
 
@@ -117,14 +118,14 @@ public class AStar {
             labyrinth[current.x][current.y + 1].parent = current;
             labyrinth[current.x][current.y + 1].shortestPath = current.shortestPath + 1;
             labyrinth[current.x][current.y + 1].distanceToGoal = labyrinth[current.x][current.y + 1].distanceToNode(goal);
-            heap.add(labyrinth[current.x][current.y + 1]);
+            Heap.add(labyrinth[current.x][current.y + 1]);
             labyrinth[current.x][current.y + 1].value = 3;
         } else if (labyrinth[current.x][current.y + 1].value == 3) {
             if (labyrinth[current.x][current.y + 1].shortestPath > current.shortestPath + 1) {
                 labyrinth[current.x][current.y + 1].parent = current;
                 labyrinth[current.x][current.y + 1].shortestPath = current.shortestPath + 1;
-                heap.remove(labyrinth[current.x][current.y + 1]);
-                heap.add(labyrinth[current.x][current.y + 1]);
+                Heap.remove(labyrinth[current.x][current.y + 1]);
+                Heap.add(labyrinth[current.x][current.y + 1]);
             }
         }
     }

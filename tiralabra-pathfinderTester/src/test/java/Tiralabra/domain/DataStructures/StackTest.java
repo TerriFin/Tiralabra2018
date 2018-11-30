@@ -25,7 +25,7 @@ public class StackTest {
     @Test
     public void afterAddingSizeIsCorrect() {
         for (int i = 0; i < 100; i++) {
-            stack.put(i);
+            stack.add(i);
         }
         
         assertEquals(100, stack.getSize());
@@ -34,11 +34,11 @@ public class StackTest {
     @Test
     public void afterAddingAndRemovingSizeIsCorrect() {
         for (int i = 0; i < 100; i++) {
-            stack.put(i);
+            stack.add(i);
         }
         
         for (int i = 0; i < 50; i++) {
-            stack.pop();
+            stack.poll();
         }
         
         assertEquals(50, stack.getSize());
@@ -47,11 +47,11 @@ public class StackTest {
     @Test
     public void afterRemovingAllIsEmpty() {
         for (int i = 0; i < 30; i++) {
-            stack.put(i);
+            stack.add(i);
         }
         
         for (int i = 0; i < 30; i++) {
-            stack.pop();
+            stack.poll();
         }
         
         assertEquals(0, stack.getSize());
@@ -60,12 +60,12 @@ public class StackTest {
     @Test
     public void popsAreInCorrectOrder() {
         for (int i = 0; i < 50; i++) {
-            stack.put(i);
+            stack.add(i);
         }
         
         for (int i = 0; i < 50; i++) {
             int expected = 49 - i;
-            int actual = stack.pop();
+            int actual = stack.poll();
             
             assertEquals(expected, actual);
         }

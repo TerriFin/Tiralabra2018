@@ -21,8 +21,8 @@ public class LabyrinthGeneratorTest {
     
     @Before
     public void setUp() {
-        smallLabyrinth = LabyrinthGenerator.generateLabyrinth(10);
-        bigLabyrinth = LabyrinthGenerator.generateLabyrinth(30);
+        smallLabyrinth = LabyrinthGenerator.generateLabyrinth(40);
+        bigLabyrinth = LabyrinthGenerator.generateLabyrinth(60);
     }
     
     @Test

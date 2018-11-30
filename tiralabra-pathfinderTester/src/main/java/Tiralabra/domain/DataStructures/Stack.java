@@ -22,7 +22,7 @@ public class Stack<T> {
         this.length = 1;
     }
 
-    public void put(T obj) {
+    public void add(T obj) {
         if (head == length) {
             doubleArraySize();
         }
@@ -30,7 +30,7 @@ public class Stack<T> {
         array[head++] = obj;
     }
 
-    public T pop() {
+    public T poll() {
         head--;
         return array[head];
     }

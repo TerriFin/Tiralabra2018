@@ -20,7 +20,7 @@ public class DepthFirst {
         this.goal = this.labyrinth[this.labyrinth.length - 2][this.labyrinth[0].length - 2];
         this.stack = new Stack<Node>(Node.class);
 
-        this.stack.put(this.current);
+        this.stack.add(this.current);
         
         this.steps = 0;
     }
@@ -30,7 +30,7 @@ public class DepthFirst {
         
         current.value = 2;
         if (!stack.isEmpty()) {
-            current = stack.pop();
+            current = stack.poll();
         } else {
             return false;
         }
@@ -67,25 +67,25 @@ public class DepthFirst {
     private void checkAdjacentNodes() {
         if (labyrinth[current.x - 1][current.y].value == 0 || labyrinth[current.x - 1][current.y].value == 5) {
             labyrinth[current.x - 1][current.y].parent = current;
-            stack.put(labyrinth[current.x - 1][current.y]);
+            stack.add(labyrinth[current.x - 1][current.y]);
             labyrinth[current.x - 1][current.y].value = 3;
         }
 
         if (labyrinth[current.x + 1][current.y].value == 0 || labyrinth[current.x + 1][current.y].value == 5) {
             labyrinth[current.x + 1][current.y].parent = current;
-            stack.put(labyrinth[current.x + 1][current.y]);
+            stack.add(labyrinth[current.x + 1][current.y]);
             labyrinth[current.x + 1][current.y].value = 3;
         }
 
         if (labyrinth[current.x][current.y - 1].value == 0 || labyrinth[current.x][current.y - 1].value == 5) {
             labyrinth[current.x][current.y - 1].parent = current;
-            stack.put(labyrinth[current.x][current.y - 1]);
+            stack.add(labyrinth[current.x][current.y - 1]);
             labyrinth[current.x][current.y - 1].value = 3;
         }
 
         if (labyrinth[current.x][current.y + 1].value == 0 || labyrinth[current.x][current.y + 1].value == 5) {
             labyrinth[current.x][current.y + 1].parent = current;
-            stack.put(labyrinth[current.x][current.y + 1]);
+            stack.add(labyrinth[current.x][current.y + 1]);
             labyrinth[current.x][current.y + 1].value = 3;
         }
     }
