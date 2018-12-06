@@ -15,6 +15,10 @@ public class SolverManager {
     private final BreadthFirst breadthFirst;
     private final DepthFirst DepthFirst;
     private final AStar AStar;
+    
+    public Node[][] solvedBreadthLabyrinth;
+    public Node[][] solvedDepthLabyrinth;
+    public Node[][] solvedStarLabyrinth;
 
     /**
      * @param labyrinth Labyrinth that is going to be solved with the different algorithms
@@ -38,6 +42,7 @@ public class SolverManager {
         boolean isLast = breadthFirst.processStep();
         
         if (isLast) {
+            solvedBreadthLabyrinth = breadthFirst.labyrinth;
             return new SolverToAnimator(breadthFirst.current, breadthFirst.labyrinth, isLast, breadthFirst.steps, breadthFirst.MarkPathToCurrent());
         }
         
@@ -55,6 +60,7 @@ public class SolverManager {
         boolean isLast = DepthFirst.processStep();
         
         if (isLast) {
+            solvedDepthLabyrinth = DepthFirst.labyrinth;
             return new SolverToAnimator(DepthFirst.current, DepthFirst.labyrinth, isLast, DepthFirst.steps, DepthFirst.markPathToCurrent());
         }
         
@@ -72,6 +78,7 @@ public class SolverManager {
         boolean isLast = AStar.processStep();
         
         if (isLast) {
+            solvedStarLabyrinth = AStar.labyrinth;
             return new SolverToAnimator(AStar.current, AStar.labyrinth, isLast, AStar.steps, AStar.markPathToCurrent());
         }
         

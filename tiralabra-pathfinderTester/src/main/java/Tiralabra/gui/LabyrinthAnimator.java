@@ -23,10 +23,13 @@ public class LabyrinthAnimator {
     private boolean starFirst;
     
     private SolverManager solverManager;
+    
+    private int finishedLabyrinthToDraw;
 
     public Timeline breadthTimeline;
     public Timeline depthTimeline;
     public Timeline starTimeline;
+    public Timeline afterCompleteTimeline;
 
     /**
      * @param labyrinth Labyrinth that is going to be animated, is going to be passed on to a new SolverManager
@@ -41,6 +44,8 @@ public class LabyrinthAnimator {
         this.starFirst = true;
         
         this.solverManager = new SolverManager(labyrinth);
+        
+        this.finishedLabyrinthToDraw = 3;
 
         this.breadthTimeline = new Timeline(new KeyFrame(Duration.millis(40), e -> {
             SolverToAnimator input = this.solverManager.getNextBreadth();
@@ -84,6 +89,19 @@ public class LabyrinthAnimator {
             if (input.labyrinthSolved) {
                 this.gui.setNewLabyrinth(input.labyrinth);
                 this.starTimeline.stop();
+                
+                this.io.activateCompletedLabyrinthsButtons();
+                this.afterCompleteTimeline.play();
+            }
+        }));
+        
+        this.afterCompleteTimeline = new Timeline(new KeyFrame(Duration.millis(300), e -> {
+            if (this.finishedLabyrinthToDraw == 1) {
+                this.gui.setNewLabyrinth(this.solverManager.solvedBreadthLabyrinth);
+            } else if (this.finishedLabyrinthToDraw == 2) {
+                this.gui.setNewLabyrinth(this.solverManager.solvedDepthLabyrinth);
+            } else if (this.finishedLabyrinthToDraw == 3) {
+                this.gui.setNewLabyrinth(this.solverManager.solvedStarLabyrinth);
             }
         }));
         
@@ -95,6 +113,8 @@ public class LabyrinthAnimator {
         
         this.starTimeline.setDelay(Duration.seconds(4));
         this.starTimeline.setCycleCount(Timeline.INDEFINITE);
+        
+        this.afterCompleteTimeline.setCycleCount(Timeline.INDEFINITE);
     }
 
     /**
@@ -104,6 +124,18 @@ public class LabyrinthAnimator {
         breadthTimeline.play();
     }
     
+    public void setFinishedLabyrinthDoDrawToBreath() {
+        finishedLabyrinthToDraw = 1;
+    }
+    
+    public void setFinishedLabyrinthDoDrawToDepth() {
+        finishedLabyrinthToDraw = 2;
+    }
+    
+    public void setFinishedLabyrinthDoDrawToStar() {
+        finishedLabyrinthToDraw = 3;
+    }
+    
     /**
      * Stops and destroys generated resources, hopefully freeing them
      */
@@ -111,11 +143,15 @@ public class LabyrinthAnimator {
         breadthTimeline.stop();
         depthTimeline.stop();
         starTimeline.stop();
+        afterCompleteTimeline.stop();
         
         breadthTimeline = null;
         depthTimeline = null;
         starTimeline = null;
+        afterCompleteTimeline = null;
         
         solverManager = null;
+        
+        gui = null;
     }
 }

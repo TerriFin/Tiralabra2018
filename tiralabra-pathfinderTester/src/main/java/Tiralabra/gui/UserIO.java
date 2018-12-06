@@ -17,14 +17,34 @@ import javafx.scene.layout.VBox;
  */
 public class UserIO {
 
-    private Label breadthSteps = new Label("0");
-    private Label breadthPath = new Label("0");
+    private Button showCompletedBreath;
+    private Label breadthSteps;
+    private Label breadthPath;
 
-    private Label depthSteps = new Label("0");
-    private Label depthPath = new Label("0");
+    private Button showCompletedDepth;
+    private Label depthSteps;
+    private Label depthPath;
 
-    private Label starSteps = new Label("0");
-    private Label starPath = new Label("0");
+    private Button showCompletedStar;
+    private Label starSteps;
+    private Label starPath;
+
+    public UserIO() {
+        this.showCompletedBreath = new Button("Show completed");
+        this.showCompletedBreath.setDisable(true);
+        this.breadthSteps = new Label("0");
+        this.breadthPath = new Label("0");
+
+        this.showCompletedDepth = new Button("Show completed");
+        this.showCompletedDepth.setDisable(true);
+        this.depthSteps = new Label("0");
+        this.depthPath = new Label("0");
+
+        this.showCompletedStar = new Button("Show completed");
+        this.showCompletedStar.setDisable(true);
+        this.starSteps = new Label("0");
+        this.starPath = new Label("0");
+    }
 
     /**
      * Updates breath-first related output
@@ -71,9 +91,21 @@ public class UserIO {
      * processing.
      */
     public HBox getUserInput(Gui gui, LabyrinthAnimator animator) {
+        showCompletedBreath.setOnAction(e -> {
+            animator.setFinishedLabyrinthDoDrawToBreath();
+        });
+        
+        showCompletedDepth.setOnAction(e -> {
+            animator.setFinishedLabyrinthDoDrawToDepth();
+        });
+        
+        showCompletedStar.setOnAction(e -> {
+            animator.setFinishedLabyrinthDoDrawToStar();
+        });
+        
         HBox root = new HBox();
 
-        root.setAlignment(Pos.BASELINE_CENTER);
+        root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(15, 15, 15, 15));
         root.setSpacing(30);
 
@@ -86,7 +118,7 @@ public class UserIO {
 
         breathStepsBox.getChildren().addAll(breadthStepsLabel, breadthSteps);
         breathPathBox.getChildren().addAll(breadthPathLabel, breadthPath);
-        breathBox.getChildren().addAll(breathStepsBox, breathPathBox);
+        breathBox.getChildren().addAll(showCompletedBreath, breathStepsBox, breathPathBox);
 
         VBox depthBox = new VBox();
         HBox depthStepsBox = new HBox();
@@ -97,7 +129,7 @@ public class UserIO {
 
         depthStepsBox.getChildren().addAll(depthStepsLabel, depthSteps);
         depthPathBox.getChildren().addAll(depthPathLabel, depthPath);
-        depthBox.getChildren().addAll(depthStepsBox, depthPathBox);
+        depthBox.getChildren().addAll(showCompletedDepth, depthStepsBox, depthPathBox);
 
         VBox starBox = new VBox();
         HBox starStepsBox = new HBox();
@@ -108,11 +140,12 @@ public class UserIO {
 
         starStepsBox.getChildren().addAll(starStepsLabel, starSteps);
         starPathBox.getChildren().addAll(starPathLabel, starPath);
-        starBox.getChildren().addAll(starStepsBox, starPathBox);
+        starBox.getChildren().addAll(showCompletedStar, starStepsBox, starPathBox);
 
         root.getChildren().addAll(breathBox, depthBox, starBox);
 
-        HBox newLabyrinthInputContainer = new HBox(5);
+        VBox newLabyrinthInputContainer = new VBox(5);
+        newLabyrinthInputContainer.setAlignment(Pos.CENTER_LEFT);
 
         Label labyrinthSizeInputLabel = new Label("Enter new labyrinth size:");
         TextField newLabyrinthSizeInput = new TextField();
@@ -138,5 +171,11 @@ public class UserIO {
 
         root.getChildren().add(newLabyrinthInputContainer);
         return root;
+    }
+    
+    public void activateCompletedLabyrinthsButtons() {
+        showCompletedBreath.setDisable(false);
+        showCompletedDepth.setDisable(false);
+        showCompletedStar.setDisable(false);
     }
 }
