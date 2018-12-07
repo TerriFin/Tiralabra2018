@@ -1,4 +1,4 @@
-# Overall program structure
+## Overall program structure
 
 All labyrinth are two dimensional Node-arrays.
 
@@ -22,13 +22,13 @@ When a new labyrinth is made, old animator and IO is replaced by new ones, and a
 GUI-class holds both the labyrinth, and IO below it. From it new labyrinths are made.
 
 
-# Achieved time and space complexities
+## Achieved time and space complexities
 
 As stated in previous documents, there are three hand-made data-structures in this project, them being a heap, a queue and a stack. I will now go throught their complexities one at a time;
 
 
 
-* Heap
+# Heap
 
 Heap has six methods available to classes using it, them being add, poll, getSize, isEmpty, remove and toString. Additionally, some of these methods call private methods that are interesting. I will go 
 
@@ -77,7 +77,7 @@ contribute to the size-complexity, since they are static and do not change in re
 
 
 
-* Queue
+# Queue
 
 queue has five methods available to the classes using it, them being put, poll getSize, isEmpty and toString.
 
@@ -99,7 +99,7 @@ This method does not call any other methods, and does not do any work relative t
 Space complexity of this data-structure is O(n), since all meta-data it uses is again singular values that do not affect the big picture.
 
 
-* Stack
+# Stack
 
 Stack has five methods available to the classes using it, them being add, poll, getSize, isEmpty and toString.
 
@@ -137,6 +137,19 @@ So the time complexity is O(4*|V|)
 
 This implementation of A* has the same big o as width-first, but since it is optimized with heuristics, it is always faster or atleast as fast as it. O(4*|V|)
 
+# Performance when compared to ready made java implementations
+
+There are instructions to run these tests and explanations how they work in testingDoc, here are the results;
+
+![image](https://user-images.githubusercontent.com/32302869/49664416-8038b200-fa5a-11e8-9fd1-c2a94b2c0070.png)
+
+As we can see, this projects stack works faster than java's ready made implementation. I figured this is because this projects version does not have as many checks in place to slow it down. (For example, this projects implementation throws exception when it is empty, while javas own gives a null value.)
+
+This projects queue on the other hand is slower, this i believe is because of some computer wizardry and optimizations the java team has made that i could not hope to even begin to understand.
+
+Finally we see that javas ready made heap is much better than this projects own heap, probably because of the same reason their queue is superior.
+
+I was actually surprised i managed to make a faster stack, but then again all my implementations are pretty barebones so i guess i got lucky with it.
 
 # What does the program lack?
 
