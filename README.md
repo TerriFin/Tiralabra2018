@@ -9,9 +9,9 @@ In this project i smash together a labyrinth generator and three labyrinth solve
 
 [How is this program implemented?](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/implementationDoc.md)
 
-[How are the tests made? How are they run?](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/testingDoc.md)
+[How do i run it?](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/manual.md)
 
-(i just realized this is not what was meant with the testing document, will fix it next week)
+[How are the tests made? How are they run?](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/testingDoc.md)
 
 ## Weekreports
 [Weekreport1](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/weekReport1.md)
@@ -23,3 +23,5 @@ In this project i smash together a labyrinth generator and three labyrinth solve
 [Weekreport4](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/weekReport4.md)
 
 [Weekreport5](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/weekReport5.md)
+
+[Weekreport6](https://github.com/TerriFin/Tiralabra2018/blob/master/documents/weekReport6.md)
