@@ -23,3 +23,8 @@ for reports, use
 * gradlew test jacocoTestReport *
 
 reports can be found in build/reports/jacoco/test/html/index.html
+
+
+# How can i run the sexy looking performance tests mentioned in implementationDoc?
+
+There is a seperate TestMain.Java main-class in the same folder as the Main.java that launches the application. You need to compile the program, and start it with java-command. Remember to use -cp correctly!

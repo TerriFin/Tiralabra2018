@@ -6,7 +6,7 @@ import java.lang.reflect.Array;
  *
  * @author samisaukkonen
  */
-public class Stack<T> {
+public class CustomStack<T> {
 
     private Class<T> t;
 
@@ -14,7 +14,7 @@ public class Stack<T> {
     private T[] array;
     private int length;
 
-    public Stack(Class<T> t) {
+    public CustomStack(Class<T> t) {
         this.t = t;
 
         this.head = 0;

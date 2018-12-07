@@ -1,6 +1,6 @@
 package Tiralabra.domain.solvers;
 
-import Tiralabra.domain.DataStructures.Stack;
+import Tiralabra.domain.DataStructures.CustomStack;
 import Tiralabra.domain.Node;
 
 public class DepthFirst {
@@ -9,7 +9,7 @@ public class DepthFirst {
 
     public Node current;
     private Node goal;
-    private Stack<Node> stack;
+    private CustomStack<Node> stack;
     
     public int steps;
 
@@ -18,7 +18,7 @@ public class DepthFirst {
 
         this.current = this.labyrinth[1][1];
         this.goal = this.labyrinth[this.labyrinth.length - 2][this.labyrinth[0].length - 2];
-        this.stack = new Stack<Node>(Node.class);
+        this.stack = new CustomStack<Node>(Node.class);
 
         this.stack.add(this.current);
         

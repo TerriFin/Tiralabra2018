@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
  */
 public class StackTest {
     
-    Stack<Integer> stack;
+    CustomStack<Integer> stack;
 
     @Before
     public void setUp() {
-        stack = new Stack<Integer>(Integer.class);
+        stack = new CustomStack<Integer>(Integer.class);
     }
     
     @Test

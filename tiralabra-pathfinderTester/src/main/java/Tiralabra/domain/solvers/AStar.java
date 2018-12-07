@@ -1,7 +1,7 @@
 package Tiralabra.domain.solvers;
 
 import Tiralabra.domain.DataStructures.Heap;
-import Tiralabra.domain.DataStructures.Stack;
+import Tiralabra.domain.DataStructures.CustomStack;
 import Tiralabra.domain.Node;
 
 public class AStar {
