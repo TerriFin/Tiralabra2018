@@ -28,3 +28,7 @@ reports can be found in build/reports/jacoco/test/html/index.html
 # How can i run the sexy looking performance tests mentioned in implementationDoc?
 
 There is a seperate TestMain.Java main-class in the same folder as the Main.java that launches the application. You need to compile the program, and start it with java-command. Remember to use -cp correctly!
+
+# How do they work?
+
+They create an instance of each mentioned data-structure, and puts stuff inside of them 6666 times, and takes stuff out of them 3333 times. They do this 100 times for each structure, and tracks the time in milliseconds.
